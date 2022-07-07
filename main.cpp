@@ -1,54 +1,67 @@
 #include <string>
 #include <vector>
-#include<map>
-#include<algorithm>
 
 using namespace std;
 
-vector<string> solution(vector<string> record) {
-    vector<string> answer;
-    vector<string>a;
-    string value = "";
-    map<string, string> m;
-    vector<pair<int, string>> re;
-    for (int i = 0; i < record.size(); i++) {
-        for (int j = 0; j < record[i].size(); j++) {
-            if (record[i][j] == ' ') {
-                a.push_back(value);
-                value = "";
+void devide(string& u, string& v,string p) {
+    int ucnt = 0;
+    int vcnt = 0;
+    u = "";
+    v = "";
+    for (int i = 0; i < p.size(); i++) {
+        if (p[i] == '(') {
+            ucnt++;
+        }
+        else {
+            vcnt++;
+        }
+        if (ucnt == vcnt) {
+            for (int i = 0; i < ucnt + vcnt; i++) {
+                u = u + p[i];
+            }
+            for (int i = ucnt + vcnt; i < p.size(); i++) {
+                v = v + p[i];
+            }
+            break;
+        }
+    }
+}
+string check(string& u, string &v, string p) {
+    devide(u, v, p);
+    if (p.size() == 0) {//최종적 단계임
+        return v;
+    }
+    string k=u;
+    if(u[0]=='('){
+        return k+check(u,v,v);
+    }
+    else {//재귀적 로직
+        string x = "";//u 의 과정
+        for (int i = 0; i < u.size(); i++) {
+            if (i == 0 || i == u.size() - 1) {
+                continue;
             }
             else {
-                value = value + record[i][j];
+                if (u[i] == '(') {
+                    x = x + ')';
+                }
+                else {
+                    x = x + '(';
+                }
             }
         }
-        a.push_back(value);
-        value = "";
+        return '(' + check(u, v, v) + ')' + x;
     }
-    for (int i = 0; i < a.size(); i++) {
-        if (a[i] == "Enter") {
-            m[a[i + 1]] = a[i + 2];
-            re.push_back(make_pair(0, a[i + 1]));
-            i = i + 2;
-        }
-        else if (a[i] == "Leave") {
-            re.push_back(make_pair(1, a[i + 1]));
-            i = i + 1;
-        }
-        else if (a[i] == "Change") {
-            m[a[i + 1]] = a[i + 2];
-            i = i + 2;
-        }
+}
+string solution(string p) {
+    string answer = "";
+    string u;
+    string v;
+    if(p.size()==0){
+        return "";
     }
-
-    for (int i = 0; i < re.size(); i++) {
-        if (re[i].first == 0) {//Enter 일때임
-            string val = m.find(re[i].second)->second + "님이 들어왔습니다.";
-            answer.push_back(val);
-        }
-        else if (re[i].first == 1) {//Leave 일때
-            string val2 = m.find(re[i].second)->second + "님이 나갔습니다.";
-            answer.push_back(val2);
-        }
+    else{
+        answer = check(u, v, p);
     }
     return answer;
 }
