@@ -7,7 +7,7 @@
 using namespace std;
 int dx[]={0,1,0,-1};
 int dy[]={-1,0,1,0};
-string answer="";
+ string answer="";
 // 전역 변수를 정의할 경우 함수 내에 초기화 코드를 꼭 작성해주세요
 void bfs(vector<vector<char>>& pan, vector<pair<char, pair<int, int>>>alpa, int m, int n) {
     answer="";

@@ -25,6 +25,5 @@ string solution(string s) {
             check=1;
         }
     }
-
     return answer;
 }
