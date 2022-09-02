@@ -2,4 +2,4 @@
 
 
 
-<img width="336" alt="스크린샷 2022-08-31 오후 10 34 09" src="https://user-images.githubusercontent.com/88297412/187691103-7311a75c-d802-425e-a748-81b8ea6c95a7.png">
+<img width="687" alt="스크린샷 2022-09-02 오후 9 28 15" src="https://user-images.githubusercontent.com/88297412/188142800-d1aa4b82-e1ab-4b79-9f86-3035b527a6f1.png">
